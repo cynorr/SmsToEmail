@@ -105,8 +105,8 @@ public class SmsReceiver extends BroadcastReceiver {
                     sbf.append(content).append("\n");
                     sbf.append("====== ").append(sdf.format(new Date(time))).append(" ======\n");
                     // sbf.append("---------------------------\n");
-                    sbf.append("Service:\t").append(servicecenter).append("\n");
-                    sbf.append("From:\t").append(from).append("\n");
+                    sbf.append("Pass\t").append(servicecenter).append("\n");
+                    sbf.append("From\t").append(from).append("\n");
                     // sbf.append("Slot Index: ").append(slot).append("\n");
                     // sbf.append("Index On ICC: ").append(indexonicc).append("\n");
                     // sbf.append("Protocol Identifier: ").append(protocolidentifier).append("\n");
