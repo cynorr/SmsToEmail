@@ -79,7 +79,7 @@ public class SmsReceiver extends BroadcastReceiver {
                     contbuf = new StringBuilder();
                     StringBuilder sbf = new StringBuilder();
                     sbf.append(content).append("\n");
-                    sbf.append("---------------------------\n")
+                    sbf.append("---------------------------\n");
                     sbf.append(context.getString(R.string.from)).append(from).append("\n");
                     sbf.append("Service Center Address: ").append(servicecenter).append("\n");
                     sbf.append("User Data: ").append(userdata).append("\n");
