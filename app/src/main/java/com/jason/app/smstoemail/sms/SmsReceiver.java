@@ -23,6 +23,9 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class SmsReceiver extends BroadcastReceiver {
     private static final String TAG = "SmsReceiver";
     private static SimpleDateFormat sdf = new SimpleDateFormat("MM/dd HH:mm:ss", Locale.getDefault());
@@ -62,6 +65,7 @@ public class SmsReceiver extends BroadcastReceiver {
             });
             //分类合并,排版
             StringBuilder contbuf = null;
+            String keyword = "NULL";
             for (SmsMessage msg : messages) {
                 String content = msg.getMessageBody();
                 String from = msg.getOriginatingAddress();
@@ -71,6 +75,18 @@ public class SmsReceiver extends BroadcastReceiver {
                 String protocolidentifier = String.valueOf(msg.getProtocolIdentifier());
                 String pdu = String.valueOf(msg.getPdu());
                 long time = msg.getTimestampMillis();
+                Pattern pattern = Pattern.compile("【(.*?)】");
+                Matcher matcher = pattern.matcher(content);
+                if (matcher.find()) {
+                    keyword = matcher.group(1);
+                } else {
+                    if (content.length() <= 10) {
+                        keyword =  content;
+                    } else {
+                        keyword =  content.substring(0, 10);
+                    }
+                }
+                
                 if (!SmsLocalManager.getInstace().isMerger()) {
                     //逐条显示
                     sendToView(context, new SmsMsg(msg));
@@ -100,7 +116,7 @@ public class SmsReceiver extends BroadcastReceiver {
             }
             //组装字符串发送
             Log.e(TAG, "v=\n" + contbuf.toString());
-            boolean isSuc = EmailMager.getInstance().sendMail(context.getString(R.string.smsTitle), contbuf.toString());
+            boolean isSuc = EmailMager.getInstance().sendMail(context.getString("SMS-" + keyword), contbuf.toString());
             if (isSuc) {
                 Log.i(TAG, "sended");
             } else {
