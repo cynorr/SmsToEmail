@@ -17,6 +17,7 @@
     <string name="powerConnected">已接通电源，充电中</string>
     <string name="powerDisConnected">电源已断开</string>
     <string name="from">来自:</string>
+    <string name="receiver">接收:</string>
     <string name="content">内容:</string>
     <string name="smsTitle">短信</string>
     <string name="sendedFailed">发送失败，请检查邮箱设置是否正确</string>
