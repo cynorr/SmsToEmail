@@ -125,7 +125,7 @@ public class SmsReceiver extends BroadcastReceiver {
             }
             //组装字符串发送
             Log.e(TAG, "v=\n" + contbuf.toString());
-            boolean isSuc = EmailMager.getInstance().sendMail("SMS-" + keyword, contbuf.toString());
+            boolean isSuc = EmailMager.getInstance().sendMail(keyword, contbuf.toString());
             if (isSuc) {
                 Log.i(TAG, "sended");
             } else {
