@@ -48,7 +48,7 @@ public class SmsReceiver extends BroadcastReceiver {
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
             Object[] pdus = (Object[]) bundle.get("pdus");
-            String slot = get("android.telephony.extra.SLOT_INDEX")
+            String slot = get("android.telephony.extra.SLOT_INDEX");
             SmsMessage[] messages = new SmsMessage[pdus.length];
             //解析
             for (int i = 0; i < pdus.length; i++)
