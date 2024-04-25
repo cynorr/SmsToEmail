@@ -103,7 +103,7 @@ public class SmsReceiver extends BroadcastReceiver {
                     contbuf = new StringBuilder();
                     StringBuilder sbf = new StringBuilder();
                     sbf.append(content).append("\n");
-                    sbf.append("====== ").append(sdf.format(new Date(time))).append(" ======\n");
+                    sbf.append("\n\n====== ").append(sdf.format(new Date(time))).append(" ======\n");
                     // sbf.append("---------------------------\n");
                     sbf.append("Pass\t").append(servicecenter).append("\n");
                     sbf.append("From\t").append(from).append("\n");
