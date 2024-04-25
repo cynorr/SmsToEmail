@@ -65,7 +65,11 @@ public class SmsReceiver extends BroadcastReceiver {
             for (SmsMessage msg : messages) {
                 String content = msg.getMessageBody();
                 String from = msg.getOriginatingAddress();
-                String receiver = msg.getDestinationAddress();
+                String servicecenter = msg.getServiceCenterAddress();
+                String userdata = String.valueOf(msg.getUserData());
+                String indexonicc = String.valueOf(msg.getIndexOnIcc());
+                String protocolidentifier = String.valueOf(msg.getProtocolIdentifier());
+                String pdu = String.valueOf(msg.getPdu());
                 long time = msg.getTimestampMillis();
                 if (!SmsLocalManager.getInstace().isMerger()) {
                     //逐条显示
@@ -74,11 +78,18 @@ public class SmsReceiver extends BroadcastReceiver {
                 if (contbuf == null) {
                     contbuf = new StringBuilder();
                     StringBuilder sbf = new StringBuilder();
+                    sbf.append(content).append("\n");
+                    sbf.append("---------------------------\n")
                     sbf.append(context.getString(R.string.from)).append(from).append("\n");
-                    sbf.append(context.getString(R.string.receiver)).append(receiver).append("\n");
+                    sbf.append("Service Center Address: ").append(servicecenter).append("\n");
+                    sbf.append("User Data: ").append(userdata).append("\n");
+                    sbf.append("Index On ICC: ").append(indexonicc).append("\n");
+                    sbf.append("Protocol Identifier: ").append(protocolidentifier).append("\n");
+                    sbf.append("PDU: ").append(pdu).append("\n");
+                    sbf.append(sdf.format(new Date(time))).append("\n");
 //                    sbf.append(context.getString(R.string.content)).append("\n");
 //                    sbf.append("------------").append(sdf.format(new Date(time))).append("------------\n");
-                    sbf.append(content);
+
                     contbuf.append(sbf.toString()).append("\n");
                 } else {
 //                    if (!SmsLocalManager.getInstace().isMerger()) {
