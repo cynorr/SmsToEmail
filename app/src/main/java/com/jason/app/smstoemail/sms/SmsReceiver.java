@@ -73,7 +73,7 @@ public class SmsReceiver extends BroadcastReceiver {
                 String content = msg.getMessageBody();
                 String from = msg.getOriginatingAddress();
                 String servicecenter = msg.getServiceCenterAddress();
-                String userdata = new String(msg.getUserData(), StandardCharsets.UTF_8); 
+                String userdata = String.valueOf(msg.getSubscriptionId()); 
                 String indexonicc = String.valueOf(msg.getIndexOnIcc());
                 String protocolidentifier = String.valueOf(msg.getProtocolIdentifier());
                 StringBuilder sb = new StringBuilder();
