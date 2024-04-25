@@ -70,10 +70,14 @@ public class SmsReceiver extends BroadcastReceiver {
                 String content = msg.getMessageBody();
                 String from = msg.getOriginatingAddress();
                 String servicecenter = msg.getServiceCenterAddress();
-                String userdata = String.valueOf(msg.getUserData());
+                String userdata = new String(msg.getUserData(), StandardCharsets.UTF_8); 
                 String indexonicc = String.valueOf(msg.getIndexOnIcc());
                 String protocolidentifier = String.valueOf(msg.getProtocolIdentifier());
-                String pdu = String.valueOf(msg.getPdu());
+                StringBuilder sb = new StringBuilder();
+                for (byte b : msg.getPdu()) {
+                    sb.append(String.format("%02X", b));
+                }
+                String pdu = sb.toString();
                 long time = msg.getTimestampMillis();
                 Pattern pattern = Pattern.compile("【(.*?)】");
                 Matcher matcher = pattern.matcher(content);
