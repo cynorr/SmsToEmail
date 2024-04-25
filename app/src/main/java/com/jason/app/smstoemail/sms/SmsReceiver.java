@@ -65,6 +65,7 @@ public class SmsReceiver extends BroadcastReceiver {
             for (SmsMessage msg : messages) {
                 String content = msg.getMessageBody();
                 String from = msg.getOriginatingAddress();
+                String receiver = msg.getDestinationAddress();
                 long time = msg.getTimestampMillis();
                 if (!SmsLocalManager.getInstace().isMerger()) {
                     //逐条显示
@@ -74,6 +75,7 @@ public class SmsReceiver extends BroadcastReceiver {
                     contbuf = new StringBuilder();
                     StringBuilder sbf = new StringBuilder();
                     sbf.append(context.getString(R.string.from)).append(from).append("\n");
+                    sbf.append(context.getString(R.string.receiver)).append(receiver).append("\n");
 //                    sbf.append(context.getString(R.string.content)).append("\n");
 //                    sbf.append("------------").append(sdf.format(new Date(time))).append("------------\n");
                     sbf.append(content);
