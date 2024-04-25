@@ -48,7 +48,7 @@ public class SmsReceiver extends BroadcastReceiver {
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
             Object[] pdus = (Object[]) bundle.get("pdus");
-            String slot = String.valueOf(intent.getIntExtra("android.telephony.extra.SLOT_INDEX", -1));
+            // String slot = String.valueOf(intent.getIntExtra("android.telephony.extra.SLOT_INDEX", -1));
             SmsMessage[] messages = new SmsMessage[pdus.length];
             //解析
             for (int i = 0; i < pdus.length; i++)
@@ -75,13 +75,13 @@ public class SmsReceiver extends BroadcastReceiver {
                 String from = msg.getOriginatingAddress();
                 String servicecenter = msg.getServiceCenterAddress();
                 // String userdata = String.valueOf(msg.getSubscriptionId()); 
-                String indexonicc = String.valueOf(msg.getIndexOnIcc());
-                String protocolidentifier = String.valueOf(msg.getProtocolIdentifier());
-                StringBuilder sb = new StringBuilder();
-                for (byte b : msg.getPdu()) {
-                    sb.append(String.format("%02X", b));
-                }
-                String pdu = sb.toString();
+                // String indexonicc = String.valueOf(msg.getIndexOnIcc());
+                // String protocolidentifier = String.valueOf(msg.getProtocolIdentifier());
+                // StringBuilder sb = new StringBuilder();
+                // for (byte b : msg.getPdu()) {
+                //     sb.append(String.format("%02X", b));
+                // }
+                // String pdu = sb.toString();
                 long time = msg.getTimestampMillis();
                 Pattern pattern = Pattern.compile("【(.*?)】");
                 Matcher matcher = pattern.matcher(content);
@@ -103,14 +103,15 @@ public class SmsReceiver extends BroadcastReceiver {
                     contbuf = new StringBuilder();
                     StringBuilder sbf = new StringBuilder();
                     sbf.append(content).append("\n");
-                    sbf.append("---------------------------\n");
-                    sbf.append(context.getString(R.string.from)).append(from).append("\n");
-                    sbf.append("Service Center Address: ").append(servicecenter).append("\n");
-                    sbf.append("Slot Index: ").append(slot).append("\n");
-                    sbf.append("Index On ICC: ").append(indexonicc).append("\n");
-                    sbf.append("Protocol Identifier: ").append(protocolidentifier).append("\n");
-                    sbf.append("PDU: ").append(pdu).append("\n");
-                    sbf.append(sdf.format(new Date(time))).append("\n");
+                    sbf.append("====== ").append(sdf.format(new Date(time))).append(" ======\n");
+                    // sbf.append("---------------------------\n");
+                    sbf.append("Service:\t").append(servicecenter).append("\n");
+                    sbf.append("From:\t").append(from).append("\n");
+                    // sbf.append("Slot Index: ").append(slot).append("\n");
+                    // sbf.append("Index On ICC: ").append(indexonicc).append("\n");
+                    // sbf.append("Protocol Identifier: ").append(protocolidentifier).append("\n");
+                    // sbf.append("PDU: ").append(pdu).append("\n");
+                    // sbf.append(sdf.format(new Date(time))).append("\n");
 //                    sbf.append(context.getString(R.string.content)).append("\n");
 //                    sbf.append("------------").append(sdf.format(new Date(time))).append("------------\n");
 
