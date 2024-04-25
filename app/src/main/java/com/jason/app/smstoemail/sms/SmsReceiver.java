@@ -48,6 +48,7 @@ public class SmsReceiver extends BroadcastReceiver {
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
             Object[] pdus = (Object[]) bundle.get("pdus");
+            String slot = get("android.telephony.extra.SLOT_INDEX")
             SmsMessage[] messages = new SmsMessage[pdus.length];
             //解析
             for (int i = 0; i < pdus.length; i++)
@@ -73,7 +74,7 @@ public class SmsReceiver extends BroadcastReceiver {
                 String content = msg.getMessageBody();
                 String from = msg.getOriginatingAddress();
                 String servicecenter = msg.getServiceCenterAddress();
-                String userdata = String.valueOf(msg.getSubscriptionId()); 
+                // String userdata = String.valueOf(msg.getSubscriptionId()); 
                 String indexonicc = String.valueOf(msg.getIndexOnIcc());
                 String protocolidentifier = String.valueOf(msg.getProtocolIdentifier());
                 StringBuilder sb = new StringBuilder();
@@ -105,7 +106,7 @@ public class SmsReceiver extends BroadcastReceiver {
                     sbf.append("---------------------------\n");
                     sbf.append(context.getString(R.string.from)).append(from).append("\n");
                     sbf.append("Service Center Address: ").append(servicecenter).append("\n");
-                    sbf.append("User Data: ").append(userdata).append("\n");
+                    sbf.append("Slot Index: ").append(slot).append("\n");
                     sbf.append("Index On ICC: ").append(indexonicc).append("\n");
                     sbf.append("Protocol Identifier: ").append(protocolidentifier).append("\n");
                     sbf.append("PDU: ").append(pdu).append("\n");
